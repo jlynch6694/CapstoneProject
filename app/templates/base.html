@@ -1,0 +1,59 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+Global Economic Data Analyzer
+{% endblock %}
+
+{% block header%} Global Economic Data Analyzer
+{% endblock %}
+
+
+
+
+{% block styles %}
+  {{ super() }} <!-- to import bootstrap 3, need super() which inherists CDN fom bootstrap base -->
+<!-- add our own stules, maybe even bootstrap 4 cdn -->
+  <link rel='stylesheet' href='../static/css/main.css'>
+{% endblock %}
+
+{% block scripts %}
+<!-- grab bootstap 3 scripts -->
+  {{super () }}
+{% endblock %}
+
+
+{% block navbar %}
+<h1 class='titlepage'>Global Economic Data Analyzer</h1>
+<nav class='navbar navbar-inverse' role='navigation'>
+  <div class='container-fluid'>
+    <div class='navbar-header'>
+      <button typer='button' class='navbar-toggle' data-toggle='collapse'>
+        <span class='icon-bar'></span>
+        <span class='icon-bar'></span>
+        <span class='icon-bar'></span>
+      </button>
+    </div>
+  </div>
+<div class='navbar-collapse collapse'>
+  <ul class='nav navbar-nav navbar-center'>
+    <li><a href='{{url_for('index')}}'>Home</a></li>
+    <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Markets <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class='dropdown-item' href='{{url_for('chart3')}}'>Commodities</a></li>
+            <li><a class='dropdown-item' href='{{url_for('chart')}}'>Currencies</a></li>
+            <li><a class='dropdown-item' href='{{url_for('chart2')}}'>Bonds</a></li>
+          </ul></li>
+    <li><a href='{{url_for('trade')}}'>Global Trade Balances</a></li>
+    <li><a href='{{url_for('corporations')}}'>Corporate Overview</a></li>
+  </ul>
+</div>
+</nav>
+
+{% endblock %}
+
+{% block content %}
+  {% block app_content %}{% endblock %}
+<body class="mainpage">
+</body>
+{% endblock %}

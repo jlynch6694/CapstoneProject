@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf%}
+
+{% block title %}{% endblock %}
+{% block app_content %}
+<html lang="en">
+<head>
+
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="col-md-6 pull-left">
+      <div class="row">
+
+        <h1 class="alert alert-info">Find the Market value of a Corporation</h1>
+        <p>{{ wtf.quick_form(form) }}</p>
+      </div>
+    </div>
+
+    {% if calc != None %}
+    <div class="col-md-5 pull-right">
+      <div class="row">
+        <div class="card">
+          <div class="card-body text-center">
+            <h4 class="card-title bg-primary text-white">
+              This company has an EV/Sales ratio of: </h4>
+            <p class="card-text">{{ calc.formatnum() }}<sup><a href="#fn1" id="ref1">1</a></sup>
+            <br><br>
+               {{ calc.printinfo() }}
+               </p>
+            <a href='{{url_for('show_map', result=result)}}' class="text-dark">Banking with Other Companies</a>
+            <hr></hr>
+          </div>
+          <sup id="fn1">1. Enterprise value-to-sales (or Ev-to-sales) is a valuation measure that compares the enterprise value (EV)    of a company to the company's sales. EV-to-sales gives investors a quantifiable metric of how much it costs to purchase the company's sales.<br><br>
+          <b>EV/Sales = [Market Capitalization + Debt + Preferred Shares - Cash and Cash Equivalents] / Annual Sales</b>
+          <a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a></sup>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+</body>
+</html>
+
+
+{% endblock %}

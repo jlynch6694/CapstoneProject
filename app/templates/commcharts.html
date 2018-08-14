@@ -1,0 +1,352 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf%}
+
+
+{% block title %}{% endblock %}
+{% block app_content %}
+<html lang="en">
+<head>
+   <meta charset="utf-8" />
+   <title>Values of Energy Commodities per Unit in US Dollars</title>
+
+   <!-- import plugin script -->
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+
+</head>
+<body>
+  <div class="col-md-8">
+    <div class="row">
+      <h1 class='commcharts'>
+        {% if form.validate_on_submit() %}
+          Values of Energy Commodities per Unit in {{ form.language.data }}s
+            {% else %}
+            Values of Energy Commodities per Unit in US Dollars
+            {% endif %}
+      </h1>
+      <!-- bar chart canvas element -->
+      <canvas id="chart3" width="400" height="300"></canvas>
+
+      <script>
+
+         // bar chart data
+         var barData3 = {
+         labels : [{% for item in energy_labels %}
+                        "{{item}}",
+                    {% endfor %}],
+         datasets : [
+            {
+                  fillColor: "rgba(151,187,205,0.2)",
+                  strokeColor: "rgba(151,187,205,1)",
+                  pointColor: "rgba(151,187,205,1)",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(151,187,205,1)",
+                  bezierCurve : false,
+                  data : [{% for item in energy_values %}  "{{ "%.2f"|format(item|float)}}",
+                          {% endfor %}]
+            }]
+         }
+
+          Chart.defaults.global.animationSteps = 50;
+          Chart.defaults.global.tooltipYPadding = 16;
+          Chart.defaults.global.tooltipCornerRadius = 0;
+          Chart.defaults.global.tooltipTitleFontStyle = "normal";
+          Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+          Chart.defaults.global.animationEasing = "easeOutBounce";
+          Chart.defaults.global.responsive = false;
+          Chart.defaults.global.scaleLineColor = "black";
+          Chart.defaults.global.scaleFontSize = 16;
+
+         // get bar chart canvas
+         var mychart3 = document.getElementById("chart3").getContext("2d");
+
+         steps = 10
+         max = {{energy_values | max }}
+         // draw bar chart
+         var LineChartDemo3 = new Chart(mychart3).Line(barData3, {
+              scaleOverride: true,
+              scaleSteps: steps,
+              scaleStepWidth: (Math.ceil(max) / steps),
+              scaleStartValue: 0,
+              scaleShowVerticalLines: true,
+              scaleShowGridLines : true,
+              barShowStroke : true,
+              scaleShowLabels: true,
+              bezierCurve: false,
+
+         });
+      </script>
+         <h1 class='commcharts'>
+           {% if form.validate_on_submit() %}
+             Values of Metals per Ounce in {{ form.language.data }}s
+               {% else %}
+               Values of Metals per Ounce in US Dollars
+               {% endif %}
+         </h1>
+         <!-- bar chart canvas element -->
+         <canvas id="chart4" width="400" height="300"></canvas>
+
+         <script>
+
+            // bar chart data
+            var barData4 = {
+            labels : [{% for item in metals_labels %}
+                           "{{item}}",
+                       {% endfor %}],
+            datasets : [
+               {
+                     fillColor: "rgba(151,187,205,0.2)",
+                     strokeColor: "rgba(151,187,205,1)",
+                     pointColor: "rgba(151,187,205,1)",
+                     pointStrokeColor: "#fff",
+                     pointHighlightFill: "#fff",
+                     pointHighlightStroke: "rgba(151,187,205,1)",
+                     bezierCurve : false,
+                     data : [{% for item in metals_values %}
+                    "{{ "%.2f"|format(item|float)}}",
+                             {% endfor %}]
+               }]
+            }
+
+             Chart.defaults.global.animationSteps = 50;
+             Chart.defaults.global.tooltipYPadding = 16;
+             Chart.defaults.global.tooltipCornerRadius = 0;
+             Chart.defaults.global.tooltipTitleFontStyle = "normal";
+             Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+             Chart.defaults.global.animationEasing = "easeOutBounce";
+             Chart.defaults.global.responsive = false;
+             Chart.defaults.global.scaleLineColor = "black";
+             Chart.defaults.global.scaleFontSize = 16;
+
+            // get bar chart canvas
+            var mychart4 = document.getElementById("chart4").getContext("2d");
+
+            steps = 10
+            max = {{metals_values | max }}
+            // draw bar chart
+            var LineChartDemo4 = new Chart(mychart4).Line(barData4, {
+                 scaleOverride: true,
+                 scaleSteps: steps,
+                 scaleStepWidth: (Math.ceil(max) / steps),
+                 scaleStartValue: 0,
+                 scaleShowVerticalLines: true,
+                 scaleShowGridLines : true,
+                 barShowStroke : true,
+                 scaleShowLabels: true,
+                 bezierCurve: false,
+
+            });
+
+      </script>
+
+
+    </div class="row">
+    <div class="row">
+      <h1 class='commcharts'>
+        {% if form.validate_on_submit() %}
+          Values of Agricultural Goods per Unit in {{ form.language.data }}s
+            {% else %}
+            Values of Agricultural Goods per Unit in US Dollars
+            {% endif %}
+      </h1>
+      <!-- bar chart canvas element -->
+      <canvas id="chart5" width="400" height="300"></canvas>
+
+      <script>
+
+         // bar chart data
+         var barData5 = {
+         labels : [{% for item in agriculture_labels %}
+                        "{{item}}",
+                    {% endfor %}],
+         datasets : [
+            {
+                  fillColor: "rgba(151,187,205,0.2)",
+                  strokeColor: "rgba(151,187,205,1)",
+                  pointColor: "rgba(151,187,205,1)",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(151,187,205,1)",
+                  bezierCurve : false,
+                  data : [{% for item in agriculture_values %}
+                    "{{ "%.2f"|format(item|float) }}",
+                          {% endfor %}]
+            }]
+         }
+
+          Chart.defaults.global.animationSteps = 50;
+          Chart.defaults.global.tooltipYPadding = 16;
+          Chart.defaults.global.tooltipCornerRadius = 0;
+          Chart.defaults.global.tooltipTitleFontStyle = "normal";
+          Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+          Chart.defaults.global.animationEasing = "easeOutBounce";
+          Chart.defaults.global.responsive = false;
+          Chart.defaults.global.scaleLineColor = "black";
+          Chart.defaults.global.scaleFontSize = 16;
+
+         // get bar chart canvas
+         var mychart5 = document.getElementById("chart5").getContext("2d");
+
+         steps = 10
+         max = {{agriculture_values | max }}
+         // draw bar chart
+         var LineChartDemo5 = new Chart(mychart5).Line(barData5, {
+              scaleOverride: true,
+              scaleSteps: steps,
+              scaleStepWidth: (Math.ceil(max) / steps),
+              scaleStartValue: 0,
+              scaleShowVerticalLines: true,
+              scaleShowGridLines : true,
+              barShowStroke : true,
+              scaleShowLabels: true,
+              bezierCurve: false,
+
+         });
+
+      </script>
+
+      <h1 class='commcharts'>
+        {% if form.validate_on_submit() %}
+          Values of Livestock per Unit in {{ form.language.data }}s
+            {% else %}
+            Values of Livestock per Unit in US Dollars
+            {% endif %}
+      </h1>
+      <!-- bar chart canvas element -->
+      <canvas id="chart6" width="400" height="300"></canvas>
+
+      <script>
+
+         // bar chart data
+         var barData6 = {
+         labels : [{% for item in livestock_labels %}
+                    "{{item}}",
+                    {% endfor %}],
+         datasets : [
+            {
+                  fillColor: "rgba(151,187,205,0.2)",
+                  strokeColor: "rgba(151,187,205,1)",
+                  pointColor: "rgba(151,187,205,1)",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(151,187,205,1)",
+                  bezierCurve : false,
+                  data : [{% for item in livestock_values %}
+                      "{{ "%.2f"|format(item|float)}}",
+                          {% endfor %}]
+            }]
+         }
+
+          Chart.defaults.global.animationSteps = 50;
+          Chart.defaults.global.tooltipYPadding = 16;
+          Chart.defaults.global.tooltipCornerRadius = 0;
+          Chart.defaults.global.tooltipTitleFontStyle = "normal";
+          Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+          Chart.defaults.global.animationEasing = "easeOutBounce";
+          Chart.defaults.global.responsive = false;
+          Chart.defaults.global.scaleLineColor = "black";
+          Chart.defaults.global.scaleFontSize = 16;
+
+         // get bar chart canvas
+         var mychart6 = document.getElementById("chart6").getContext("2d");
+
+         steps = 10
+         max = {{livestock_values | max }}
+         // draw bar chart
+         var LineChartDemo6 = new Chart(mychart6).Line(barData6, {
+              scaleOverride: true,
+              scaleSteps: steps,
+              scaleStepWidth: (Math.ceil(max) / steps),
+              scaleStartValue: 0,
+              scaleShowVerticalLines: true,
+              scaleShowGridLines : true,
+              barShowStroke : true,
+              scaleShowLabels: true,
+              bezierCurve: false,
+
+         });
+
+
+        </script>
+
+
+      </div class="row">
+      <div class="row">
+
+      <h1 class='commcharts'>
+        {% if form.validate_on_submit() %}
+          Values of Industrial Goods per Unit in {{ form.language.data }}s
+            {% else %}
+            Values of Industrial Goods per Unit in US Dollars
+            {% endif %}
+      </h1>
+      <!-- bar chart canvas element -->
+      <canvas id="chart7" width="400" height="300"></canvas>
+
+      <script>
+
+         // bar chart data
+         var barData7 = {
+         labels : [{% for item in industrial_labels %}
+                    "{{ item }}",
+                    {% endfor %}],
+         datasets : [
+            {
+                  fillColor: "rgba(151,187,205,0.2)",
+                  strokeColor: "rgba(151,187,205,1)",
+                  pointColor: "rgba(151,187,205,1)",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(151,187,205,1)",
+                  bezierCurve : false,
+                  data : [{% for item in industrial_values %}
+                      "{{"%.2f"|format(item|float)}}",
+                          {% endfor %}]
+            }]
+         }
+
+          Chart.defaults.global.animationSteps = 50;
+          Chart.defaults.global.tooltipYPadding = 16;
+          Chart.defaults.global.tooltipCornerRadius = 0;
+          Chart.defaults.global.tooltipTitleFontStyle = "normal";
+          Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+          Chart.defaults.global.animationEasing = "easeOutBounce";
+          Chart.defaults.global.responsive = false;
+          Chart.defaults.global.scaleLineColor = "black";
+          Chart.defaults.global.scaleFontSize = 16;
+
+         // get bar chart canvas
+         var mychart7 = document.getElementById("chart7").getContext("2d");
+
+         steps = 10
+         max = {{industrial_values | max }}
+         // draw bar chart
+         var LineChartDemo7 = new Chart(mychart7).Line(barData7, {
+              scaleOverride: true,
+              scaleSteps: steps,
+              scaleStepWidth: (Math.ceil(max) / steps),
+              scaleStartValue: 0,
+              scaleShowVerticalLines: true,
+              scaleShowGridLines : true,
+              barShowStroke : true,
+              scaleShowLabels: true,
+              bezierCurve: false,
+
+         });
+
+
+          </script>
+        </div class="row">
+      </div class="col">
+
+    <div class="col-md-4">
+      <div class="row">
+        {{ wtf.quick_form(form) }}
+      </div>
+    </div>
+
+
+    </body>
+  </html>
+
+{% endblock %}
