@@ -1,6 +1,4 @@
 import math
-from app.forms import currencyForm, InputGDP
-
 
 def convertThis(q, v):
     if q == 'US Dollar':

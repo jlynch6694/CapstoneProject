@@ -112,7 +112,6 @@ def show_map(result):
     marker_cluster = folium.plugins.MarkerCluster().add_to(mapthis)
     addCircle(marker_cluster, int(float(result)))
     return mapthis.get_root().render()
-    # return render_template('map.html', mapthis=mapthis)
 
 
 
